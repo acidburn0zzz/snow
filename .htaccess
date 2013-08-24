@@ -1,0 +1,35 @@
+##RewriteEngine on
+
+##RewriteCond %{REQUEST_FILENAME} !-f
+##RewriteCond %{REQUEST_FILENAME} !-d
+
+##RewriteRule ^(.*)$ index.php?request=$1 [L,QSA]
+
+Options -Indexes -MultiViews
+DirectoryIndex index.php
+
+RewriteEngine on
+## Enable the RewriteBase if you can't access index.php under the directory, or if the rewriting doesn't work.
+## Examples: RewriteBase /snow; RewriteBase /snow/; RewriteBase /~username/snow
+## RewriteBase /snow
+
+RewriteCond $0 ^(robots.txt|public/) [OR]
+RewriteCond %{ENV:REDIRECT_STATUS} 200
+RewriteRule .* - [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+## This handles the $_GET['request'].
+RewriteRule ^(.*)$ index.php?request=$1 [L,QSA]
+
+## Deny access to .ini files.
+##<Files  ~ "\.ini$">
+##  Order allow,deny
+##  Deny from all
+##</Files>
+
+## GZIP
+<ifmodule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/xml text/css application/javascript
+</ifmodule>
