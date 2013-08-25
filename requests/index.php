@@ -6,11 +6,8 @@ Class Index extends Snow\Controller {
 
     public function get_main() {
         echo 'Hello from class Index that extends Base and the function name is main()';
-        #View::test();
-        View::test();
-        #echo 'Base test:<br>';
-        #var_dump($this)
-        #var_dump($test); // No $this->The_Helper :(
+        #View::test(); < THIS WITHOUT namespace Snow\Lib in /snow/lib/view.php
+        Snow\Lib\View::test(); # < OR THIS with namespace \Snow\Lib in /snow/lib/view.php
         $this->always_available();
     }
 

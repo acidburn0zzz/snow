@@ -1,5 +1,7 @@
 <?php
 
+namespace Snow;
+
 // Get the singleton first!
 require_once SNOW_DIR . 'base.php';
 

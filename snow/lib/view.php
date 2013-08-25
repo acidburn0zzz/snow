@@ -1,5 +1,7 @@
 <?php
 
+namespace Snow\Lib;
+
 Class View {
 
     public static function test() {

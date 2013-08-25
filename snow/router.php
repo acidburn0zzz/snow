@@ -1,6 +1,6 @@
 <?php
 
-namespace Snow\Router;
+namespace Snow;
 
 /** Router  */
 $request = (isset($_GET['request'])) ? htmlspecialchars($_GET['request']) : 'index/main';
