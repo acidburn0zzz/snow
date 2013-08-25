@@ -1,7 +1,7 @@
 <?php
 if(!defined('SNOW')) { die('Cannot access directly!'); }
 
-Class Index extends Snow\Controller {
+Class Index extends \Snow\Controller {
 
     public $restful = true;
 
@@ -10,6 +10,8 @@ Class Index extends Snow\Controller {
         #View::test(); < THIS WITHOUT namespace Snow\Lib in /snow/lib/view.php
         \Snow\Lib\View::test(); # < OR THIS with namespace \Snow\Lib in /snow/lib/view.php
         $this->always_available();
+
+        $db = \Snow\Lib\Database::getInstance();
     }
 
     public function post_main() {
