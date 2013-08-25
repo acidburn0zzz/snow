@@ -1,6 +1,7 @@
 <?php
-
 namespace Snow;
+
+if(!defined('SNOW')) { die('Cannot access directly!'); }
 
 /** Singleton */
 Abstract Class Base {

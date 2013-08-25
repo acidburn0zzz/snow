@@ -1,6 +1,7 @@
 <?php
-
 namespace Snow\Lib;
+
+if(!defined('SNOW')) { die('Cannot access directly!'); }
 
 Class View {
 

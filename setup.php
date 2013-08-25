@@ -2,15 +2,35 @@
 if(!defined('SNOW')) { die('Cannot access directly!'); }
 
 // Start the counter!
-define('SNOW_START', time());
+define('SNOW_START', microtime(1));
 
-// Debug level. 1 = development, 0 = production.
-define('DEBUG', 1);
+Abstract Class Setup {
+    // Debug level. 1 = development, 0 = production.
+    const DEBUG         = true;
+    // Full URI to your website. Used in templates and such.
+    const URL           = 'http://localhost/snow/';
+    // Down for maintenance or not?
+    const MAINTENANCE   = false;
+    // SQL Host. Usually this is "localhost".
+    const SQL_HOST      = 'localhost';
+    // SQL Username.
+    const SQL_USERNAME  = 'root';
+    // SQL Password.
+    const SQL_PASSWORD  = '';
+    // SQL Port. Default is 3306.
+    const SQL_PORT      = 3306;
+    // SQL Charset. utf8 is good practice.
+    const SQL_CHARSET   = 'utf8';
+    // SQL Database itself.
+    const SQL_DATABASE  = 'skola';
+    // You should not touch this.
+    const VERSION       = 3.0;
+}
+
+// Sessions, most likely going to be needed.
 session_start();
-// Full URL to the project INCLUDING the trailing slash. Used in the template files and such.
-define('URL', 'http://localhost/snow/');
 
-// Shorthand HTTP verbs
+// You shouldn't worry about this at all, especially if you use RESTful implementations.
 define('HTTP_POST', ($_SERVER['REQUEST_METHOD'] == 'POST' ? true : false));
 define('HTTP_GET',  ($_SERVER['REQUEST_METHOD'] == 'GET'  ? true : false));
 define('HTTP_AJAX', ($_SERVER['REQUEST_METHOD'] == 'xmlhttprequest' ? true : false));
@@ -18,15 +38,7 @@ define('HTTP_AJAX', ($_SERVER['REQUEST_METHOD'] == 'xmlhttprequest' ? true : fal
 // Root path, used to include files and whatnot.
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', __DIR__ . DS);
-define('SNOW_DIR', __DIR__ . DS . 'snow' . DS); // Snow's own root directory.
-// Whether you want your website to be down for maintenance or not.
-// define('MAINTENANCE', 0);
+define('SNOW_DIR', __DIR__ . DS . 'snow' . DS); # Snow's own root directory.
 
-/** You shouldn't touch these. */
-define('VERSION', 2.0);
-if(DEBUG) { error_reporting(-1); }else { error_reporting(0); }
-
-// Which helpers to load and what to pass onto them as the construct?
-#$helpers = array(
-#    'test' => time()
-#);
+// You should not touch this, as well.
+if(Setup::DEBUG) { error_reporting(-1); }else { error_reporting(0); }

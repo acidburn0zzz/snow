@@ -1,6 +1,7 @@
 <?php
-
 namespace Snow;
+
+if(!defined('SNOW')) { die('Cannot access directly!'); }
 
 Class Controller extends Base {
     // User added functions go here.

@@ -1,0 +1,2 @@
+﻿setup.php treba bit class u kojemu su sve define() konstante (const)
+I onda se calla: Setup::DB_PASS i tako nešto

@@ -1,6 +1,7 @@
 <?php
-
 namespace Snow;
+
+if(!defined('SNOW')) { die('Cannot access directly!'); }
 
 // Get the singleton first!
 require_once SNOW_DIR . 'base.php';
@@ -12,4 +13,14 @@ require_once SNOW_DIR . 'controller.php';
 foreach(glob(SNOW_DIR . 'lib' . DS . '*.php') as $lib) { require_once $lib; }
 
 // And finish it off with the router.
-require_once SNOW_DIR . 'router.php'; 
+require_once SNOW_DIR . 'router.php';
+
+// Go!
+try {
+    Router::go();
+}catch (Exception $e) {
+    trigger_error($e->getMessage());
+}
+
+echo round((microtime(1)-SNOW_START)*1000, 6) . 'ms<br>';
+echo (memory_get_usage()%1000) . 'kB';
