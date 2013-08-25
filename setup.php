@@ -27,6 +27,6 @@ define('VERSION', 2.0);
 if(DEBUG) { error_reporting(-1); }else { error_reporting(0); }
 
 // Which helpers to load and what to pass onto them as the construct?
-$helpers = array(
-    'test' => time()
-);
+#$helpers = array(
+#    'test' => time()
+#);
