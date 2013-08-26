@@ -21,12 +21,13 @@ Class Router {
         // Implode da args:
         $arguments = strtolower(implode('/', $request));
 
-        echo 'Class is: ' . $class . '<br>';
-        echo 'Function is: ' . $function . '<br>';
-        echo 'Arguments are: ' . $arguments . '<br>';
+        #echo 'Class is: ' . $class . '<br>';
+        #echo 'Function is: ' . $function . '<br>';
+        #echo 'Arguments are: ' . $arguments . '<br>';
 
         $_c = ROOT . 'requests' . DS . strtolower($class) . '.php';
-        if(!file_exists($_c) || !is_readable($_c)) { throw new Exception('Cannot read the class file - ' . $_c); }
+        #if(!file_exists($_c) || !is_readable($_c)) { throw new \Exception('Cannot read the class file - ' . $_c); }
+        if(!file_exists($_c) || !is_readable($_c)) { throw new \Exception(404); }
 
         // The file exists, that is good, now load it.
         require_once $_c;
@@ -64,7 +65,7 @@ Class Router {
         // Now let's check whether the function we're calling is public or private.
         // Incase it's private or, perhaps it doesn't exist, throw a 404 error.
         if(!method_exists($request_instance, $function) || !in_array($function, get_class_methods($request_instance))) {
-            throw new Exception(404); // TODO: This will be handled via the HTTP static library.
+            throw new \Exception(404); // TODO: This will be handled via the HTTP static library.
         }
 
         // That's it...and I pass it to the class, what what.

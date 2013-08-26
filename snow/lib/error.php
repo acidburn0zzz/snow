@@ -14,6 +14,8 @@ Class Error {
     public static function shutdown() {
         $last_error = error_get_last();
         // This is fatal...
-        var_dump($last_error);
+        #var_dump($last_error);
     }
+
+    // Nemoj zaboravit na error_log()!
 }

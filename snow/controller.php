@@ -11,13 +11,17 @@ Class Controller extends Base {
 
     public static function ante_router() {
         // This gets run before a request is called.
-        echo 'Hi??';
+        echo Lib\View::render('header');
     }
 
     public static function post_router() {
         // This gets run after a request is called.
-        echo round((microtime(1)-SNOW_START)*1000, 6) . 'ms<br>';
-        echo (memory_get_usage()%1000) . 'kB';
+        $time_taken     = round((microtime(1)-SNOW_START)*1000, 2);
+        $memory_usage   = (memory_get_usage()%1000);
+        echo Lib\View::render('footer', array(
+            'time_taken'    =>  $time_taken,
+            'memory_usage'  =>  $memory_usage
+        ));
     }
 
     public function always_available() {
