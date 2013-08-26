@@ -12,7 +12,10 @@ Class Database {
     public static function getInstance() {
         if(!isset(self::$instance) || empty(self::$instance)) {
             try {
-                self::$instance = new Database('mysql:host=' . \Setup::SQL_HOST . ';dbname=' . \Setup::SQL_DATABASE . ';charset=' . \Setup::SQL_CHARSET, \Setup::SQL_USERNAME, \Setup::SQL_PASSWORD);
+                self::$instance = new \PDO('mysql:host=' . \Setup::SQL_HOST . ';dbname=' . \Setup::SQL_DATABASE . ';charset=' . \Setup::SQL_CHARSET, \Setup::SQL_USERNAME, \Setup::SQL_PASSWORD, array(
+                    \PDO::ATTR_PERSISTENT => true
+                ));
+                self::$instance->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             }catch (PDOException $e) {
                 throw new Exception('PDO Error: ' . $e->getMessage());
             }

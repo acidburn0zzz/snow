@@ -39,6 +39,7 @@ define('HTTP_AJAX', ($_SERVER['REQUEST_METHOD'] == 'xmlhttprequest' ? true : fal
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', __DIR__ . DS);
 define('SNOW_DIR', __DIR__ . DS . 'snow' . DS); # Snow's own root directory.
+define('LANGUAGE', (isset($_COOKIE['lang'])) ? htmlspecialchars($_COOKIE['lang']) : null);
 
 // You should not touch this, as well.
 if(Setup::DEBUG) { error_reporting(-1); }else { error_reporting(0); }

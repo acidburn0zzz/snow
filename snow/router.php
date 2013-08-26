@@ -65,7 +65,6 @@ Class Router {
         // Incase it's private or, perhaps it doesn't exist, throw a 404 error.
         if(!method_exists($request_instance, $function) || !in_array($function, get_class_methods($request_instance))) {
             throw new Exception(404); // TODO: This will be handled via the HTTP static library.
-            unset($request_instance); // Poof!
         }
 
         // That's it...and I pass it to the class, what what.
@@ -74,5 +73,7 @@ Class Router {
         }else {
             $request_instance->$function();
         }
+
+        unset($request_instance); // Poof
     }
 }
