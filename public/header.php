@@ -36,6 +36,10 @@
             font-family: verdana, sans-serif, serif;
             font-size: 10px;
         }
+        .panel-body {
+            font-family: verdana, sans-serif, serif;
+            font-size: 12px;
+        }
     </style>
   </head>
 

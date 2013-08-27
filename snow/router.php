@@ -31,10 +31,11 @@ Class Router {
 
         // The file exists, that is good, now load it.
         require_once $_c;
-    
+
         // Try to initiate the class
         $class = ucfirst($class);
-        $request_instance = new $class($Base);
+        // $request_instance = new $class($Base);
+        $request_instance = new $class();
 
         // Don't forget Snow is RESTful...find out if the user wants it RESTful.
         if(isset($request_instance->restful)) {

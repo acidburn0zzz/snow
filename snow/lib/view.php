@@ -5,8 +5,6 @@ if(!defined('SNOW')) { die('Cannot access directly!'); }
 
 Class View {
 
-    // $filename - either user input or guessed (get_called_class)
-    // $vars - array($name, $id, $email) OR array('name' => $username);
     public static function render($filename = NULL, $vars = array()) {
         // We have to guess the filename.
         if(is_null($filename)) {
@@ -24,9 +22,7 @@ Class View {
             throw new \Exception('Could not open or read the following template file: ' . $_f);
         }
 
-        // Find out whether we're dealing with user defined vars or not.
-        $_vars = array();
-        $i = 0;
+        // Extract the variables passed, if there are any.
         if(!empty($vars)) { extract($vars); }
 
         // Parse away!

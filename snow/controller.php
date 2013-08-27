@@ -15,12 +15,10 @@ Class Controller extends Base {
     }
 
     public static function post_router() {
-        // This gets run after a request is called.
-        $time_taken     = round((microtime(1)-SNOW_START)*1000, 2);
-        $memory_usage   = (memory_get_usage()%1000);
+        // This gets run after a request is made.
+        $info           = Lib\Debug::debug_info();
         echo Lib\View::render('footer', array(
-            'time_taken'    =>  $time_taken,
-            'memory_usage'  =>  $memory_usage
+            'info'  =>  $info
         ));
     }
 

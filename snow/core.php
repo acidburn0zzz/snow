@@ -7,24 +7,26 @@ if(!defined('SNOW')) { die('Cannot access directly!'); }
 require_once SNOW_DIR . 'base.php';
 
 // We need our static libs from the /snow/libs/ directory.
-foreach(glob(SNOW_DIR . 'lib' . DS . '*.php') as $lib) { require_once $lib; }
+foreach(glob(SNOW_DIR . 'lib' . DS . '*.php') as $lib) { require $lib; }
 #spl_autoload_register(function ($lib) {
 #    require SNOW_DIR . 'lib' . DS . $lib . '.php';
 #});
 
+// Set the Debug library to handle errors and exceptions and debugging stuff.
+set_error_handler(array('\Snow\Lib\Debug', 'handle_error'));
+register_shutdown_function(array('\Snow\Lib\Debug', 'shutdown'));
+set_exception_handler(function ($e) { trigger_error($e->getMessage(), E_USER_ERROR); });
+
 // Get the base controller that must be extended.
 require_once SNOW_DIR . 'controller.php';
-
-// Set the Error library to handle errors and exceptions.
-set_error_handler(array('\Snow\Lib\Error', 'handle'));
-register_shutdown_function(array('\Snow\Lib\Error', 'shutdown'));
-set_exception_handler(function ($e) { trigger_error($e->getMessage(), E_USER_ERROR); });
 
 // And finish it off with the router.
 require_once SNOW_DIR . 'router.php';
 
 // Pre-route hook.
 if(method_exists('\Snow\Controller', 'ante_router')) { Controller::ante_router(); }
+
+#echo 'hi';
 
 // Go!
 try {
