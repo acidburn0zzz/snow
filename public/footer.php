@@ -19,6 +19,17 @@
                     <td><?php var_dump(error_get_last()); ?></td>
                 </tr>
                 <tr>
+                    <td><a href="#" onclick="v('stack');">Call stack</a></td>
+                        <td><span id="stack" style="display: block;"><?php
+                            $stack = array_values($stack);
+
+                            for($i = 0; $i < count($stack); $i++) {
+                                echo vsprintf('[<span style="color: red">%d</span>]&nbsp;<span style="color: green">%s</span> in <span style="font-weight: 400;">%s:%d</span>, <span style="color: purple">%f</span><br>', array($stack[$i]['calls'], $stack[$i]['function'], $stack[$i]['file'], $stack[$i]['line'], $stack[$i]['time']));
+                            }
+                            ?>
+                        </pre></td>
+                </tr>
+                <tr>
                     <td><a href="#" onclick="v('get');">$_GET</a></td>
                     <td><pre id="get" style="display: none;"><?php var_dump($_GET); ?></pre></td>
                 </tr>

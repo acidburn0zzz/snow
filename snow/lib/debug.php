@@ -5,7 +5,9 @@ if(!defined('SNOW')) { die('Cannot access directly!'); }
 
 Class Debug {
 
-    public static $var = array();
+    public static $var          = array();
+    public static $stack        = array();
+    public static $void_time    = 0;
 
     public static function handle_error($errno, $errstr, $errfile, $errline) {
         if(\Setup::DEBUG) {
@@ -81,6 +83,35 @@ Class Debug {
         $last_error = error_get_last();
         // This is fatal...
         #var_dump($last_error);
+    }
+
+    public static function handle_tick() {
+        self::$void_time = microtime(true);
+        #$delta = round((microtime(true) - self::$void_time)*1000);
+
+        $backtrace = debug_backtrace();
+        if(count($backtrace) < 1) { return; }
+
+        $frame = $backtrace[1];
+        unset($backtrace); # free up some memory
+
+        $function = $frame['function'];
+        $line     = $frame['line'];
+        $file     = $frame['file'];
+
+        if(!array_key_exists($function, self::$stack)) {
+            #array_push(self::$stack, $function);
+            self::$stack[$function]['function'] = $function;
+            self::$stack[$function]['file']     = $file;
+            self::$stack[$function]['line']     = $line;
+            self::$stack[$function]['calls']    = 0;
+            self::$stack[$function]['time']     = ((microtime(true)-self::$void_time)*1000);
+        }else {
+            #self::$stack[$function]['calls']--;
+            self::$stack[$function]['calls']++;
+        }
+
+        self::$void_time = microtime(true);
     }
 
     public static function debug_info() {

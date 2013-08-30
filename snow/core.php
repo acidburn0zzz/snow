@@ -16,6 +16,7 @@ foreach(glob(SNOW_DIR . 'lib' . DS . '*.php') as $lib) { require $lib; }
 set_error_handler(array('\Snow\Lib\Debug', 'handle_error'));
 register_shutdown_function(array('\Snow\Lib\Debug', 'shutdown'));
 set_exception_handler(function ($e) { trigger_error($e->getMessage(), E_USER_ERROR); });
+declare(ticks=1);register_tick_function(array('\Snow\Lib\Debug', 'handle_tick'));
 
 // Get the base controller that must be extended.
 require_once SNOW_DIR . 'controller.php';

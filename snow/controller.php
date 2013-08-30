@@ -18,7 +18,8 @@ Class Controller extends Base {
         // This gets run after a request is made.
         $info           = Lib\Debug::debug_info();
         echo Lib\View::render('footer', array(
-            'info'  =>  $info
+            'info'  =>  $info,
+            'stack'  =>  Lib\Debug::$stack
         ));
     }
 
